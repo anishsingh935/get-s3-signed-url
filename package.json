@@ -1,0 +1,21 @@
+{
+  "name": "get-s3-signed-url",
+  "version": "1.0.0",
+  "description": "A simple utility to generate pre-signed URLs for uploading files to AWS S3 buckets.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "AWS",
+    "S3",
+    "pre-signed-url",
+    "file-upload",
+    "utility"
+  ],
+  "author": "Anish Kumar Singh",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1579.0"
+  }
+}
