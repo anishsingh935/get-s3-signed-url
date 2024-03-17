@@ -9,8 +9,9 @@ npm install get-s3-signed-url
 ```
 
 ## Usage 🛠️
-```bash
+
 **Define configuration for file upload:**
+```bash
 const config = {
     BUCKET_NAME: 'BUCKET_NAME',
     REGION: 'REGION',
@@ -19,9 +20,10 @@ const config = {
     contentType: 'contentType',
     type: 'images',
 }
-
+```
 **Generate pre-signed URL:**
-**const { getSignedUrlForUpload } = require('get-s3-signed-url');**
+```bash
+const { getSignedUrlForUpload } = require('get-s3-signed-url');
 
 // Hit the function with the config as a parameter to get the signed URL
 getSignedUrlForUpload(config)
@@ -33,8 +35,9 @@ getSignedUrlForUpload(config)
   .catch(error => {
     console.error('Error:', error);
   });
-
+```
 **Access the stored media with the same signed URL using the extractURLTillPNG function:**
+```bash
 function extractURLTillPNG(url) {
     const pngIndex =
       url.indexOf(".jpg") !== -1 ? url.indexOf(".jpg") : url.indexOf(".png");
