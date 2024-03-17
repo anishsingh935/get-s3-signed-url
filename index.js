@@ -1,37 +1,47 @@
-const { S3 } = require('aws-sdk');
+import AWS from 'aws-sdk';
 
-const getSignedUrlForUpload = async (config) => {
-    // Construct the object key by combining the type and fileName------
-    const { fileName, type = 'images' } = config;
-    const key = `${type}/${fileName}`;
+const generateSignedUploadUrl = async (config) => {
 
-    const params = {
-        Bucket: config.BUCKET_NAME,
-        Key: key,
-        Expires: 300,
-        ContentType: config.contentType,
-    };
+    try {
+        const { BUCKET_NAME, REGION, acl, fileName, contentType, type } = config;
 
-    // Set the parameters for generating the pre-signed URL------
-    if (config.acl) {
-        params.ACL = config.acl;
-    }
-    // Generate the pre-signed URL------
-    const url = await new Promise((resolve, reject) => {
-        const s3 = new S3({
-            region: config.REGION,
+        // Initialize the S3 client
+        const s3 = new AWS.S3({
+            region: REGION,
             signatureVersion: 'v4',
         });
-        // Generate the pre-signed URL for 'putObject' operation------
-        s3.getSignedUrl('putObject', params, (err, result) => {
-            if (err) reject(err);
 
-            resolve(result);
+        // Key is formed by combining the type and fileName
+        const key = `${type}/${fileName}`;
+
+        // Parameters for generating the signed URL
+        const params = {
+            Bucket: BUCKET_NAME,
+            Key: key,
+            Expires: 300,
+            ContentType: contentType,
+        };
+
+        // Set ACL if provided
+        if (acl) {
+            params.ACL = acl;
+        }
+
+        // Generate the signed URL
+        const signedUrl = await new Promise((resolve, reject) => {
+            s3.getSignedUrl('putObject', params, (err, url) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(url);
+                }
+            });
         });
-    });
-    return url;
+
+        return signedUrl;
+    } catch (error) {
+        throw error;
+    }
 };
 
-module.exports = {
-    getSignedUrlForUpload
-}
+export { generateSignedUploadUrl };
