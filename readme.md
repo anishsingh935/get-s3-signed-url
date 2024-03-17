@@ -21,7 +21,7 @@ const config = {
 }
 
 **Generate pre-signed URL:**
-const { getSignedUrlForUpload } = require('get-s3-signed-url');
+**const { getSignedUrlForUpload } = require('get-s3-signed-url');**
 
 // Hit the function with the config as a parameter to get the signed URL
 getSignedUrlForUpload(config)
