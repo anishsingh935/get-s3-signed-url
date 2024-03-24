@@ -44,16 +44,4 @@ const generateSignedUploadUrl = async (config) => {
     }
 };
 
-const config = {
-    BUCKET_NAME: 'image-upload-feature',
-    REGION: 'ap-south-1',
-    acl: 'public-read',
-    fileName: "hello",
-    contentType: "image/jpg",
-    type: 'images',
-};
-generateSignedUploadUrl(config).then((res) => {
-    console.log("AWS generated signed url", res);
-});
-
-// export { generateSignedUploadUrl };
+module.exports = { generateSignedUploadUrl };
