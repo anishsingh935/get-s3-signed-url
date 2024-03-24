@@ -23,10 +23,10 @@ const config = {
 ```
 **Generate pre-signed URL:**
 ```bash
-const { getSignedUrlForUpload } = require('get-s3-signed-url');
+const { generateSignedUploadUrl } = require('get-s3-signed-url');
 
 // Hit the function with the config as a parameter to get the signed URL
-getSignedUrlForUpload(config)
+generateSignedUploadUrl(config)
   .then(url => {
     console.log('Pre-signed URL:', url);
     // Hit the signed URL with the PUT method and the media you want to upload
@@ -57,3 +57,4 @@ function extractURLTillPNG(url) {
 
 ## Contributing 🤝
 Contributions are welcome! Please feel free to open issues or submit pull requests.
+connect with me: https://www.linkedin.com/in/anish-singh-571a08200/

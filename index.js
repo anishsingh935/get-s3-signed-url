@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk';
+const AWS = require('aws-sdk');
 
 const generateSignedUploadUrl = async (config) => {
 
@@ -44,4 +44,16 @@ const generateSignedUploadUrl = async (config) => {
     }
 };
 
-export { generateSignedUploadUrl };
+const config = {
+    BUCKET_NAME: 'image-upload-feature',
+    REGION: 'ap-south-1',
+    acl: 'public-read',
+    fileName: "hello",
+    contentType: "image/jpg",
+    type: 'images',
+};
+generateSignedUploadUrl(config).then((res) => {
+    console.log("AWS generated signed url", res);
+});
+
+// export { generateSignedUploadUrl };
